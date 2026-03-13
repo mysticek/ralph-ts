@@ -55,6 +55,25 @@ This runs an interactive interview, installs the Ralph orchestrator into your pr
 
 Auto-detects your tech stack, asks ~20 targeted questions, installs the orchestrator, and generates config files.
 
+### Generate a PRD
+
+If you used `/init` with a feature description, `prd.json` is already created. Otherwise:
+
+```
+/prd Add task priority system with badges and filtering
+```
+
+This asks 3-5 clarifying questions, then generates `prd.json` directly — the only file Ralph needs to run.
+
+`/prd` is your main entry point for every new feature. When you're done with one feature and want to start the next, just run `/prd` again with a new description. Ralph automatically archives the previous `prd.json` and `progress.md` to `archive/YYYY-MM-DD-feature-name/` when the branch name changes, so you never lose history.
+
+**Typical workflow:**
+```
+/prd Add user authentication        → Ralph implements it
+/prd Add task priority system        → previous run archived, Ralph starts fresh
+/prd Add notification system         → archived again, next feature
+```
+
 ### Then run Ralph
 
 ```bash
