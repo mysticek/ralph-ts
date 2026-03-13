@@ -1,0 +1,20 @@
+# Ralph working files (generated during runs)
+prd.json
+progress.txt
+progress.md
+.last-branch
+ralph-metrics.csv
+
+# Archive is optional to commit
+# archive/
+
+# Dependencies
+node_modules/
+bun.lock
+
+# OS files
+.DS_Store
+
+# Claude
+.claude/
+myapp.db*

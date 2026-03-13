@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Ralph — Autonomous AI agent loop
+# Wrapper script: detects bun → node fallback → install guide
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENTRY="$SCRIPT_DIR/src/tui/index.tsx"
+
+# ─── Colors ──────────────────────────────────────────────────────────────
+BOLD='\033[1m'
+DIM='\033[2m'
+CYAN='\033[36m'
+YELLOW='\033[33m'
+GREEN='\033[32m'
+RED='\033[31m'
+RESET='\033[0m'
+
+# ─── Check for bun (fastest — 18ms startup) ─────────────────────────────
+if command -v bun &>/dev/null; then
+  exec bun "$ENTRY" "$@"
+fi
+
+# ─── Fallback to node (52ms startup) ────────────────────────────────────
+if command -v node &>/dev/null; then
+  NODE_VERSION=$(node -v)
+  NODE_MAJOR=$(echo "$NODE_VERSION" | sed 's/v\([0-9]*\).*/\1/')
+
+  HEADLESS_ENTRY="$SCRIPT_DIR/src/ralph.ts"
+
+  if [ "$NODE_MAJOR" -ge 22 ]; then
+    echo ""
+    echo -e "${YELLOW}${BOLD}⚡ Note:${RESET} Node.js doesn't support TSX — running in ${DIM}headless mode${RESET} (no interactive TUI)."
+    echo -e "   For the full TUI experience, install ${CYAN}bun${RESET} ${DIM}(also ~3x faster)${RESET}:"
+    echo -e "   ${GREEN}curl -fsSL https://bun.sh/install | bash${RESET}"
+    echo ""
+    exec node --experimental-strip-types "$HEADLESS_ENTRY" "$@"
+  else
+    echo ""
+    echo -e "${RED}${BOLD}✗ Node.js too old${RESET}"
+    echo -e "  Detected: ${DIM}${NODE_VERSION}${RESET} — Ralph needs Node 22+ for native TypeScript."
+    echo ""
+    echo -e "${BOLD}Recommended: Install bun ${DIM}(fastest runtime, 18ms startup)${RESET}"
+    echo ""
+    echo -e "  ${GREEN}curl -fsSL https://bun.sh/install | bash${RESET}"
+    echo ""
+    echo -e "${DIM}Or update Node.js to v22+: https://nodejs.org${RESET}"
+    exit 1
+  fi
+fi
+
+# ─── No runtime found ───────────────────────────────────────────────────
+echo ""
+echo -e "${RED}${BOLD}✗ No JavaScript runtime found${RESET}"
+echo ""
+echo -e "Ralph needs ${CYAN}bun${RESET} or ${CYAN}Node.js 22+${RESET} to run."
+echo ""
+echo -e "${BOLD}Recommended: Install bun ${DIM}(fastest runtime, 18ms startup)${RESET}"
+echo ""
+echo -e "  ${GREEN}curl -fsSL https://bun.sh/install | bash${RESET}"
+echo ""
+echo -e "${DIM}Alternative: Install Node.js 22+ from https://nodejs.org${RESET}"
+exit 1

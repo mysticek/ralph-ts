@@ -1,0 +1,10 @@
+{
+  "name": "ralph-ts",
+  "version": "2.0.0",
+  "description": "Ralph — autonomous AI agent loop with interactive TUI. Initialize projects, generate PRDs, and run autonomous iterations with real-time streaming.",
+  "author": {
+    "name": "mysticek"
+  },
+  "skills": "./skills/",
+  "keywords": ["ralph", "agent", "automation", "tui", "prd", "brownfield", "init"]
+}
