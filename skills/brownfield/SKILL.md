@@ -193,9 +193,8 @@ Print a summary:
 
 **Next steps:**
 1. Review generated files and adjust as needed
-2. Create a PRD with `/ralph-ts:prd`
-3. Convert to prd.json with `/ralph-ts:convert`
-4. Run Ralph: `cd {scripts_dir} && ./ralph`
+2. Generate prd.json: `/ralph-ts:prd`
+3. Run Ralph: `cd {scripts_dir} && ./ralph`
 ```
 
 ---

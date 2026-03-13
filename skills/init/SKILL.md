@@ -310,10 +310,9 @@ Print a summary:
 
 **Next steps:**
 1. Review generated files and adjust as needed
-2. Create a PRD: `/ralph-ts:prd`
-3. Convert to prd.json: `/ralph-ts:convert`
-4. Run Ralph: `cd {scripts_dir} && ./ralph`
-5. Check status: `cd {scripts_dir} && bun src/ralph.ts status`
+2. Generate prd.json: `/ralph-ts:prd`
+3. Run Ralph: `cd {scripts_dir} && ./ralph`
+4. Check status: `cd {scripts_dir} && bun src/ralph.ts status`
 ```
 
 ---
@@ -322,24 +321,11 @@ Print a summary:
 
 **This phase only runs if the user provided a feature description as an argument to `/ralph-ts:init`.**
 
-If the user invoked the skill with a description (e.g., `/ralph-ts:init Create a todo app with React, add/delete/toggle todos`), generate both the PRD markdown and prd.json automatically.
+If the user invoked the skill with a description (e.g., `/ralph-ts:init Create a todo app with React, add/delete/toggle todos`), generate `prd.json` directly.
 
-### Step 1: Generate PRD Markdown
+### Generate prd.json
 
-Using the user's description and the interview answers (tech stack, quality commands, etc.), generate a PRD following the same format as the `/ralph-ts:prd` skill:
-
-- Save to `tasks/prd-[feature-name].md`
-- Include: Introduction, Goals, User Stories, Functional Requirements, Non-Goals
-- User stories must be small enough for one Ralph iteration
-- Acceptance criteria must be verifiable
-- Always include "Typecheck passes" in every story
-- For UI stories, include "Verify in browser using dev-browser skill"
-
-**Use the tech stack context from the interview** to make stories more specific (e.g., if they chose React + Vite, reference actual file paths like `src/App.tsx`).
-
-### Step 2: Generate prd.json
-
-Convert the PRD to `prd.json` in the project root, following the `/ralph-ts:convert` skill format:
+Using the user's description and the interview answers (tech stack, quality commands, etc.), generate `prd.json` in the ralph scripts directory:
 
 ```json
 {
@@ -360,6 +346,8 @@ Convert the PRD to `prd.json` in the project root, following the `/ralph-ts:conv
 }
 ```
 
+**Use the tech stack context from the interview** to make stories more specific (e.g., if they chose React + Vite, reference actual file paths like `src/App.tsx`).
+
 **Story ordering rules:**
 1. Schema/database changes first
 2. Backend logic second
@@ -368,22 +356,26 @@ Convert the PRD to `prd.json` in the project root, following the `/ralph-ts:conv
 
 **Story sizing rule:** If you cannot describe the change in 2-3 sentences, split it into multiple stories.
 
-### Step 3: Update Summary
+**Acceptance criteria rules:**
+- Must be verifiable (not vague)
+- Always include "Typecheck passes" in every story
+- For UI stories, include "Verify in browser using dev-browser skill"
+
+### Update Summary
 
 Replace the "Next steps" in the output summary:
 
 ```
 **Next steps:**
-1. Review generated PRD at tasks/prd-[feature-name].md
-2. Review prd.json — adjust stories if needed
-3. Run Ralph: `cd {scripts_dir} && ./ralph`
+1. Review prd.json — adjust stories if needed
+2. Run Ralph: `cd {scripts_dir} && ./ralph`
 ```
 
-Instead of the default next steps that tell the user to run `/ralph-ts:prd` and `/ralph-ts:convert` manually.
+Instead of the default next steps that tell the user to run `/ralph-ts:prd` manually.
 
 ### No Description Provided
 
-If the user runs `/ralph-ts:init` without a description, skip Phase 4 entirely. The output summary should show the default next steps pointing to `/ralph-ts:prd` and `/ralph-ts:convert`.
+If the user runs `/ralph-ts:init` without a description, skip Phase 4 entirely. The output summary should show the default next steps pointing to `/ralph-ts:prd`.
 
 ---
 

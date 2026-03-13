@@ -17,14 +17,13 @@ Inspired by [Geoffrey Huntley's Ralph pattern](https://ghuntley.com/ralph/) and 
 /plugin install ralph-ts@ralph-ts-marketplace
 ```
 
-This gives you four skills:
+This gives you three skills:
 
 | Skill | What it does |
 |-------|-------------|
 | `/init` | Set up Ralph on a **new project** — installs orchestrator, generates config |
 | `/brownfield` | Set up Ralph on an **existing codebase** — auto-detects stack, installs orchestrator |
-| `/prd` | Generate a Product Requirements Document from a feature description |
-| `/convert` | Convert a PRD to `prd.json` for autonomous execution |
+| `/prd` | Generate `prd.json` from a feature description |
 
 ### Manual install (Amp / Claude Code without marketplace)
 
@@ -36,7 +35,6 @@ git clone https://github.com/mysticek/ralph-ts.git
 cp -r ralph-ts/skills/init ~/.claude/skills/    # or ~/.config/amp/skills/
 cp -r ralph-ts/skills/brownfield ~/.claude/skills/
 cp -r ralph-ts/skills/prd ~/.claude/skills/
-cp -r ralph-ts/skills/convert ~/.claude/skills/
 ```
 
 ## Quick Start
