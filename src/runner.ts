@@ -150,6 +150,7 @@ export function runToolAsync(
           }
           usage.inputTokens += (u.input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0);
           usage.outputTokens += u.output_tokens ?? 0;
+          callbacks.onUsage?.({ ...usage });
         }
         return;
       }
