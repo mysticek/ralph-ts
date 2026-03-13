@@ -69,9 +69,10 @@ This asks 3-5 clarifying questions, then generates `prd.json` directly — the o
 
 **Typical workflow:**
 ```
-/prd Add user authentication        → Ralph implements it
-/prd Add task priority system        → previous run archived, Ralph starts fresh
-/prd Add notification system         → archived again, next feature
+/prd Add user authentication        → generates prd.json
+./ralph                              → implements all stories
+/prd Add task priority system        → archives previous run, generates new prd.json
+./ralph                              → implements next feature
 ```
 
 ### Then run Ralph
