@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Ralph — autonomous AI agent loop with interactive TUI. Initialize projects, generate PRDs, and run autonomous iterations with real-time streaming.",
-    "version": "2.0.0"
+    "version": "2.1.0"
   },
   "plugins": [
     {
       "name": "ralph-ts",
       "source": "./",
       "description": "Project initialization (greenfield + brownfield), PRD generation, and conversion skills for the Ralph autonomous agent loop",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "keywords": ["ralph", "agent", "automation", "tui", "prd", "brownfield", "init"],
       "category": "productivity",
       "skills": "./skills/"
