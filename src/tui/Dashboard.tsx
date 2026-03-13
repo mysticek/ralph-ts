@@ -18,6 +18,7 @@ interface DashboardProps {
   fileChanges: string[];
   activityLog: string[];
   elapsedSeconds: number;
+  totalElapsedSeconds: number;
   usage?: UsageInfo;
 }
 
@@ -43,6 +44,7 @@ export function Dashboard({
   fileChanges,
   activityLog,
   elapsedSeconds,
+  totalElapsedSeconds,
   usage,
 }: DashboardProps) {
   const total = prd.userStories.length;
@@ -91,8 +93,8 @@ export function Dashboard({
         <Box flexDirection="column" alignItems="flex-end">
           <Text>
             {config.tool} · iter {iteration}/{config.maxIterations}
-            {phase === "running" || phase === "judge" ? (
-              <Text dimColor> · {formatElapsed(elapsedSeconds)}</Text>
+            {totalElapsedSeconds > 0 ? (
+              <Text dimColor> · Run: {formatElapsed(totalElapsedSeconds)}</Text>
             ) : null}
           </Text>
           <Text>
@@ -163,6 +165,9 @@ export function Dashboard({
           >
             <Text color={phaseColor}>
               {phaseLabel}
+              {currentStory && (phase === "running" || phase === "judge") ? (
+                <Text> {currentStory.id}</Text>
+              ) : null}
               {(phase === "running" || phase === "judge") && elapsedSeconds > 0 ? (
                 <Text dimColor> {formatElapsed(elapsedSeconds)}</Text>
               ) : null}

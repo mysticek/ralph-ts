@@ -67,6 +67,7 @@ export function App({
   const [activityLog, setActivityLog] = useState<string[]>([]);
   const [doneMessage, setDoneMessage] = useState("");
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [totalElapsedSeconds, setTotalElapsedSeconds] = useState(0);
   const [usage, setUsage] = useState<UsageInfo | undefined>();
 
   const templateDir = join(
@@ -97,13 +98,14 @@ export function App({
     }
   }, [prd, appPhase, dashPhase, currentStory]);
 
-  // Elapsed time counter — ticks every second while running
+  // Elapsed time counters — per-iteration resets, total never resets
   useEffect(() => {
     if (appPhase !== "running") return;
     if (dashPhase === "done" || dashPhase === "failed") return;
 
     const timer = setInterval(() => {
       setElapsedSeconds((s) => s + 1);
+      setTotalElapsedSeconds((s) => s + 1);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -423,6 +425,7 @@ export function App({
         fileChanges={fileChanges}
         activityLog={activityLog}
         elapsedSeconds={elapsedSeconds}
+        totalElapsedSeconds={totalElapsedSeconds}
         usage={usage}
       />
       {(dashPhase === "done" || dashPhase === "failed") && (
