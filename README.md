@@ -21,10 +21,10 @@ This gives you four skills:
 
 | Skill | What it does |
 |-------|-------------|
-| `/ralph-init` | Set up Ralph on a **new project** — installs orchestrator, generates config |
-| `/brownfield-init` | Set up Ralph on an **existing codebase** — auto-detects stack, installs orchestrator |
+| `/init` | Set up Ralph on a **new project** — installs orchestrator, generates config |
+| `/brownfield` | Set up Ralph on an **existing codebase** — auto-detects stack, installs orchestrator |
 | `/prd` | Generate a Product Requirements Document from a feature description |
-| `/ralph` | Convert a PRD to `prd.json` for autonomous execution |
+| `/convert` | Convert a PRD to `prd.json` for autonomous execution |
 
 ### Manual install (Amp / Claude Code without marketplace)
 
@@ -33,10 +33,10 @@ This gives you four skills:
 git clone https://github.com/mysticek/ralph-ts.git
 
 # Copy skills to your config
-cp -r ralph-ts/skills/ralph-init ~/.claude/skills/    # or ~/.config/amp/skills/
-cp -r ralph-ts/skills/brownfield-init ~/.claude/skills/
+cp -r ralph-ts/skills/init ~/.claude/skills/    # or ~/.config/amp/skills/
+cp -r ralph-ts/skills/brownfield ~/.claude/skills/
 cp -r ralph-ts/skills/prd ~/.claude/skills/
-cp -r ralph-ts/skills/ralph ~/.claude/skills/
+cp -r ralph-ts/skills/convert ~/.claude/skills/
 ```
 
 ## Quick Start
@@ -44,7 +44,7 @@ cp -r ralph-ts/skills/ralph ~/.claude/skills/
 ### New project
 
 ```
-/ralph-init Build a todo app with add, delete, and toggle
+/init Build a todo app with add, delete, and toggle
 ```
 
 This runs an interactive interview, installs the Ralph orchestrator into your project, generates all config files, and creates `prd.json` — ready to run in one step.
@@ -52,7 +52,7 @@ This runs an interactive interview, installs the Ralph orchestrator into your pr
 ### Existing codebase
 
 ```
-/brownfield-init
+/brownfield
 ```
 
 Auto-detects your tech stack, asks ~20 targeted questions, installs the orchestrator, and generates config files.

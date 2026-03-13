@@ -1,5 +1,5 @@
 ---
-name: brownfield-init
+name: brownfield
 description: "Initialize Ralph for an existing (brownfield) codebase. Auto-detects tech stack, patterns, and conventions, then installs the Ralph orchestrator and generates CLAUDE.md, AGENTS.md, progress.md, and tasks/ directory through interactive interview. Use when setting up Ralph on a project that already has code. Triggers on: brownfield init, setup ralph for existing project, bootstrap ralph."
 user-invocable: true
 ---
@@ -90,7 +90,7 @@ Two parts: install the Ralph orchestrator, then generate config files.
 
 Determine the Ralph repo location. The skill is loaded from the Ralph repo, so use the skill's own path to find the source files.
 
-**Find the ralph repo:** The skill file lives at `{ralph_repo}/skills/brownfield-init/SKILL.md`. Navigate up two levels from the skill's location to find the ralph repo root.
+**Find the ralph repo:** The skill file lives at `{ralph_repo}/skills/brownfield/SKILL.md`. Navigate up two levels from the skill's location to find the ralph repo root.
 
 Copy the TypeScript orchestrator, TUI, and templates to the target location (from Q23, default `scripts/ralph/`):
 
@@ -193,8 +193,8 @@ Print a summary:
 
 **Next steps:**
 1. Review generated files and adjust as needed
-2. Create a PRD with `/prd`
-3. Convert to prd.json with `/ralph`
+2. Create a PRD with `/ralph-ts:prd`
+3. Convert to prd.json with `/ralph-ts:convert`
 4. Run Ralph: `cd {scripts_dir} && ./ralph`
 ```
 
@@ -204,7 +204,7 @@ Print a summary:
 
 ### Empty or near-empty codebase
 If fewer than 5 source files are detected, suggest the greenfield workflow instead:
-> "This looks like a new project with very few files. Consider using the standard Ralph setup (write CLAUDE.md manually, create PRD with `/prd`) instead of brownfield init. Continue anyway?"
+> "This looks like a new project with very few files. Consider using the standard Ralph setup (write CLAUDE.md manually, create PRD with `/ralph-ts:prd`) instead of brownfield init. Continue anyway?"
 
 ### Monorepo detected
 Ask which app or package to initialize for. Scope all detection to that path. Generate files in the monorepo root but with scope annotations.

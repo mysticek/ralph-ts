@@ -1,5 +1,5 @@
 ---
-name: ralph-init
+name: init
 description: "Initialize Ralph for a new (greenfield) project. Sets up ralph.ts orchestrator, CLAUDE.md, AGENTS.md, progress.md, and tasks/ directory through a short interactive interview. Copies all scripts and installs dependencies. Optionally accepts a feature description to also generate PRD + prd.json in one step. Use when starting a new project with Ralph from scratch. Triggers on: ralph init, initialize ralph, setup ralph, greenfield init, start ralph."
 user-invocable: true
 ---
@@ -8,7 +8,7 @@ user-invocable: true
 
 Set up Ralph for a new or nearly-empty project. Copies the TypeScript orchestrator and prompt templates, generates configuration files, and prepares the project for autonomous iteration.
 
-**If the user provides a feature description** (e.g., `/ralph-init Create a todo app with add/delete/toggle`), also generate the PRD and prd.json at the end — making the project ready to run Ralph immediately.
+**If the user provides a feature description** (e.g., `/ralph-ts:init Create a todo app with add/delete/toggle`), also generate the PRD and prd.json at the end — making the project ready to run Ralph immediately.
 
 ---
 
@@ -36,7 +36,7 @@ Before asking questions, silently check:
 5. **Does `CLAUDE.md` exist?** Read it if so — we'll merge, not overwrite
 6. **Does `AGENTS.md` exist?** Same as above
 7. **Does `package.json` exist?** Read for project name, scripts, deps — use detected values as defaults
-8. **Count source files** — If >20 source files, suggest `/brownfield-init` instead (it has auto-detection)
+8. **Count source files** — If >20 source files, suggest `/ralph-ts:brownfield` instead (it has auto-detection)
 
 Build a quick internal summary of what exists. Do NOT show raw scan output.
 
@@ -103,7 +103,7 @@ Show a brief overview:
 
 Determine the Ralph repo location. The skill is loaded from the Ralph repo, so use the skill's own path to find the source files.
 
-**Find the ralph repo:** The skill file lives at `{ralph_repo}/skills/ralph-init/SKILL.md`. Navigate up two levels from the skill's location to find the ralph repo root.
+**Find the ralph repo:** The skill file lives at `{ralph_repo}/skills/init/SKILL.md`. Navigate up two levels from the skill's location to find the ralph repo root.
 
 Copy the TypeScript orchestrator, TUI, and templates to the target location from Q8:
 
@@ -310,8 +310,8 @@ Print a summary:
 
 **Next steps:**
 1. Review generated files and adjust as needed
-2. Create a PRD: `/prd`
-3. Convert to prd.json: `/ralph`
+2. Create a PRD: `/ralph-ts:prd`
+3. Convert to prd.json: `/ralph-ts:convert`
 4. Run Ralph: `cd {scripts_dir} && ./ralph`
 5. Check status: `cd {scripts_dir} && bun src/ralph.ts status`
 ```
@@ -320,13 +320,13 @@ Print a summary:
 
 ## Phase 4: PRD Generation (Optional)
 
-**This phase only runs if the user provided a feature description as an argument to `/ralph-init`.**
+**This phase only runs if the user provided a feature description as an argument to `/ralph-ts:init`.**
 
-If the user invoked the skill with a description (e.g., `/ralph-init Create a todo app with React, add/delete/toggle todos`), generate both the PRD markdown and prd.json automatically.
+If the user invoked the skill with a description (e.g., `/ralph-ts:init Create a todo app with React, add/delete/toggle todos`), generate both the PRD markdown and prd.json automatically.
 
 ### Step 1: Generate PRD Markdown
 
-Using the user's description and the interview answers (tech stack, quality commands, etc.), generate a PRD following the same format as the `/prd` skill:
+Using the user's description and the interview answers (tech stack, quality commands, etc.), generate a PRD following the same format as the `/ralph-ts:prd` skill:
 
 - Save to `tasks/prd-[feature-name].md`
 - Include: Introduction, Goals, User Stories, Functional Requirements, Non-Goals
@@ -339,7 +339,7 @@ Using the user's description and the interview answers (tech stack, quality comm
 
 ### Step 2: Generate prd.json
 
-Convert the PRD to `prd.json` in the project root, following the `/ralph` skill format:
+Convert the PRD to `prd.json` in the project root, following the `/ralph-ts:convert` skill format:
 
 ```json
 {
@@ -379,11 +379,11 @@ Replace the "Next steps" in the output summary:
 3. Run Ralph: `cd {scripts_dir} && ./ralph`
 ```
 
-Instead of the default next steps that tell the user to run `/prd` and `/ralph` manually.
+Instead of the default next steps that tell the user to run `/ralph-ts:prd` and `/ralph-ts:convert` manually.
 
 ### No Description Provided
 
-If the user runs `/ralph-init` without a description, skip Phase 4 entirely. The output summary should show the default next steps pointing to `/prd` and `/ralph`.
+If the user runs `/ralph-ts:init` without a description, skip Phase 4 entirely. The output summary should show the default next steps pointing to `/ralph-ts:prd` and `/ralph-ts:convert`.
 
 ---
 
@@ -395,7 +395,7 @@ If `src/ralph.ts` or `ralph` wrapper already exists in the expected location, as
 
 ### Large existing codebase (>20 source files)
 Suggest brownfield-init instead:
-> "This project has {N} source files. `/brownfield-init` can auto-detect your tech stack and conventions. Use brownfield-init instead?"
+> "This project has {N} source files. `/ralph-ts:brownfield` can auto-detect your tech stack and conventions. Use brownfield-init instead?"
 
 If user wants to continue with ralph-init anyway, proceed normally.
 
