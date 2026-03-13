@@ -31,7 +31,7 @@ if (process.argv[2] === "status") {
 // Validate prd.json
 if (!existsSync(PRD_PATH)) {
   console.error("Error: prd.json not found at", PRD_PATH);
-  console.error("Create one with: /ralph or copy prd.json.example");
+  console.error("Create one with: /ralph-ts:prd");
   process.exit(1);
 }
 

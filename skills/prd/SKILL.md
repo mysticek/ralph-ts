@@ -15,7 +15,7 @@ Generate `prd.json` directly from a feature description — the only file Ralph 
 1. Receive a feature description from the user
 2. Ask 3-5 essential clarifying questions (with lettered options)
 3. Generate `prd.json` based on answers
-4. Save to the ralph scripts directory (or project root if no scripts dir)
+4. **Find the ralph directory** — look for the `ralph` wrapper script (check `scripts/ralph/`, `ralph/`, or project root). Save `prd.json` next to the `ralph` wrapper script. If no ralph directory exists, save to project root.
 
 **Important:** Do NOT start implementing. Just create the prd.json.
 
